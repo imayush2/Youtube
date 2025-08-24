@@ -1,4 +1,6 @@
 import { useSearchParams } from "react-router-dom";
+import CommentsContainer from "./CommentsContainer";
+import LiveChat from "./LiveChat";
 
 const WatchPage = () => {
   const [searchParam] = useSearchParams();
@@ -6,10 +8,13 @@ const WatchPage = () => {
   console.log("Search Parameters:", searchParam.get("v"));
 
   return (
-    <div>
+
+    
+<div>
+    <div className="flex gap-5">
       <iframe
-        width="560"
-        height="315"
+        width="760"
+        height="500"
         src={`https://www.youtube.com/embed/${searchParam.get("v")}`}
         title="YouTube video player"
         frameborder="0"
@@ -17,6 +22,19 @@ const WatchPage = () => {
         referrerpolicy="strict-origin-when-cross-origin"
         allowfullscreen
       ></iframe>
+      <div/>
+
+      <div>
+        <LiveChat/>
+      </div>
+
+      </div>
+  
+
+
+      <div>
+        <CommentsContainer />
+      </div>
     </div>
   );
 };

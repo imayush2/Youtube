@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleMenu } from "../Redux/appSlice";
 import { YOUTUBE_SEARCH_API } from "../utils/constants";
+import { cacheResults } from "../Redux/cacheSlice";
 
 const Head = () => {
   const [searchQuery, setSearchQuery] = React.useState("");
@@ -9,24 +10,35 @@ const Head = () => {
   const [suggestions, setSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
 
+  const dispatch = useDispatch();
+
+  const slider = useSelector((store) => store.app.isSlideBarOpen);
+  const cache = useSelector((store) => store.cache);
+
+  console.log("Cache in Header:", cache);
+
   const handleSearch = async () => {
     console.log("Search Query:", searchQuery);
     const response = await fetch(YOUTUBE_SEARCH_API + searchQuery);
     const data = await response.json();
     console.log("Search Results:", data[1]);
     setSuggestions(data[1]);
+    dispatch(cacheResults({ [searchQuery]: data[1] }));
   };
 
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
-      handleSearch();
+      if (cache[searchQuery]) {
+        setSuggestions(cache[searchQuery]);
+        return;
+      } else {
+        handleSearch();
+      }
     }, 200);
     return () => clearTimeout(delayDebounceFn);
   }, [searchQuery]);
 
-  const dispatch = useDispatch();
-
-  const slider = useSelector((store) => store.app.isSlideBarOpen);
+  
 
   const handleToggle = () => {
     dispatch(toggleMenu(!slider)); // Assuming toggleSidebar is an action creator to toggle sidebar visibility
