@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleMenu } from "../Redux/appSlice";
+// import { toggleMenu } from "../Redux/appSlice";
 import { YOUTUBE_SEARCH_API } from "../utils/constants";
 import { cacheResults } from "../Redux/cacheSlice";
 import ButtonList from "./ButtonList";
@@ -13,7 +13,7 @@ const Head = () => {
 
   const dispatch = useDispatch();
 
-  const slider = useSelector((store) => store.app.isSlideBarOpen);
+  //const slider = useSelector((store) => store.app.isSlideBarOpen);
   const cache = useSelector((store) => store.cache);
 
   console.log("Cache in Header:", cache);
@@ -48,9 +48,9 @@ const Head = () => {
         <div className="flex col-span-1 ">
           <img
             className="h-8 p-1"
-            onClick={() => {
-              handleToggle();
-            }}
+            // onClick={() => {
+            //   handleToggle();
+            // }}
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRr-cwMeLLj8MfIo3HoXJKFcOFB1g9U4DDMHA&s"
             alt="hamber-icon"
           />
