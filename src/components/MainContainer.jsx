@@ -4,13 +4,9 @@ import VideoContainer from "./VideoContainer";
 const MainContainer = () => {
   return (
     <div className="flex flex-col w-full">
-      {/* Button list at the top */}
-      <div className=" bg-white z-10 shadow-sm">
-        <ButtonList />
-      </div>
 
       {/* Video container below */}
-      <div className="">
+      <div className="mt-0">  {/* ✅ Removed extra margin */}
         <VideoContainer />
       </div>
     </div>

@@ -1,11 +1,25 @@
 import { useSearchParams } from "react-router-dom";
 import CommentsContainer from "./CommentsContainer";
 import LiveChat from "./LiveChat";
+import { useEffect, useState } from "react";
+import WatchPageShimmer from "./WatchPageShimmer";
 
 const WatchPage = () => {
+  const [loader, setLoader] = useState(true); 
   const [searchParam] = useSearchParams();
 
-  console.log("Search Parameters:", searchParam.get("v"));
+   useEffect(() => {
+    // Simulate loading for shimmer effect
+    const timer = setTimeout(() => {
+      setLoader(false);
+    }, 1000); // Adjust time as needed
+    return () => clearTimeout(timer);
+  }, []);
+
+
+  if(loader){
+    return <div><WatchPageShimmer /></div>
+  }
 
   return (
 

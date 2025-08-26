@@ -24,10 +24,7 @@ function App() {
     <>
       <Provider store={appStore}>
       <div className="flex flex-col h-screen">
-        {/* Fixed Header */}
         <Head />
-
-        {/* Scrollable Main Section */}
         <div className="flex-1 overflow-auto">
           <RouterProvider router={appRouter} />
         </div>
